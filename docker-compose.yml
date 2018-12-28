@@ -1,0 +1,17 @@
+version: "3"
+services:
+    pgdb:
+        image: postgres:latest
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_DB: nqueens
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data
+        ports:
+            - "5432:5432" 
+    nqueens:
+        build: .
+        depends_on:
+            - pgdb
